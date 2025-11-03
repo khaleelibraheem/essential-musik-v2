@@ -46,12 +46,12 @@ export const metadata = {
     locale: "en_US",
     url: "/",
     siteName: "Essential Musik",
-    title: "Essential Musik | Independent Afrobeats Label",
+    title: "Essential Musik",
     description:
-      "Discover authentic Afrobeats and West African music. Home to Skepper Jarju and emerging artists redefining modern African sound.",
+      "Tune in for the latest tracks, exclusive performances, and behind-the-scenes glimpses into the world of Artists Development. Home to Skepper Jarju and emerging artists redefining modern African sound.",
     images: [
       {
-        url: "/og-image.jpeg",
+        url: "/og-image.png",
         width: 1200,
         height: 630,
         alt: "Essential Musik - Defining the Sound of Now",
@@ -64,7 +64,7 @@ export const metadata = {
     title: "Essential Musik | Independent Afrobeats Label",
     description:
       "Discover authentic Afrobeats and West African music. Home to Skepper Jarju and emerging artists.",
-    images: ["/og-image.jpeg"],
+    images: ["/og-image.png"],
     creator: "@essentialmusik",
   },
   
