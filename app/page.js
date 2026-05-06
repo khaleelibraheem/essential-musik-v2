@@ -20,6 +20,7 @@ export default function EssentialMusik() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [previewProgress, setPreviewProgress] = useState(0);
   const [showStreamingLinks, setShowStreamingLinks] = useState(null);
+  const [selectedArtist, setSelectedArtist] = useState(null);
   const audioRef = useRef(null);
   const router = useRouter();
 
@@ -41,20 +42,35 @@ export default function EssentialMusik() {
     };
   }, [mobileMenuOpen]);
 
-  const artist = {
-    id: 1,
-    name: "Skepper Jarju",
-    genre: "Afrobeats",
-    image: "/Skepper.jpeg",
-    bio: "Gambian Afrobeats artist bringing infectious rhythms and authentic West African energy to the global stage.",
-    socials: {
-      instagram: "https://instagram.com/skepperjarju",
-      spotify: "https://open.spotify.com/artist/...",
-      youtube: "https://youtube.com/@skepperjarjuofficial2530",
-      tiktok: "https://tiktok.com/skepperjarju",
-      applemusic: "https://music.apple.com/us/artist/skepper/1740668223",
+  const artists = [
+    {
+      id: 1,
+      name: "Skepper Jarju",
+      genre: "Afrobeats",
+      image: "/skepper.jpg",
+      bio: "Skepper Jarju is a Gambian Afrobeats artist whose sound blends infectious rhythms, vibrant melodies, and authentic West African energy. Inspired by the global rise of Afrobeats, he creates music centered around rhythm, culture, emotion, and connection. With a style that combines energetic delivery, relatable storytelling, and rich African influences, Skepper Jarju’s music reflects passion, creativity, and originality. Proudly representing Gambian talent, he continues to build his presence within the Afrobeats scene while working on new music and steadily carving out a unique lane of his own.",
+      socials: {
+        instagram: "https://instagram.com/skepperjarju",
+        spotify: "https://open.spotify.com/artist/...",
+        youtube: "https://youtube.com/@skepperjarjuofficial2530",
+        tiktok: "https://tiktok.com/skepperjarju",
+        applemusic: "https://music.apple.com/us/artist/skepper/1740668223",
+      },
     },
-  };
+    {
+      id: 2,
+      name: "Zimre",
+      genre: "Afrofusion",
+      bio: "Zimre is a Nigerian singer and songwriter from Kogi State, raised in Kaduna, whose soulful Afrofusion blends emotion, rhythm, and heartfelt storytelling. Inspired by artists like Ed Sheeran, Johnny Drille, and Wizkid, he creates music centered around love, reflection, and deep human connection. Starting his musical journey in the church choir and pursuing music seriously since 2019, Zimre’s sound is calm, honest, and emotionally rich. Rooted in faith and guided by authenticity, he is currently working on new singles and an upcoming EP while steadily building a unique lane of his own.",
+      image: "/zimre.jpg",
+      socials: {
+        instagram: "https://instagram.com/zimre",
+        spotify: "",
+        youtube: "",
+        tiktok: "",
+      },
+    },
+  ];
 
   const tracks = [
     {
@@ -228,141 +244,336 @@ export default function EssentialMusik() {
           <div className="max-w-7xl mx-auto">
             <div className="mb-12 sm:mb-16">
               <p className="text-xs tracking-widest uppercase opacity-60 mb-4">
-                Featured Artist
+                Artists
               </p>
               <h2 className="text-4xl sm:text-5xl md:text-7xl font-light tracking-tight">
                 Roster
               </h2>
             </div>
 
-            <div className="relative overflow-hidden">
-              {/* Main Artist Card */}
-              <div className="grid md:grid-cols-5 gap-0 items-center">
-                {/* Image Side */}
-                <div className="relative aspect-3/4 overflow-hidden group md:col-span-2">
-                  <Image
-                    src={artist.image}
-                    alt={artist.name}
-                    width={500}
-                    height={500}
-                    className="w-full h-full object-cover transition-all duration-700 group-hover:scale-110 group-hover:brightness-110"
-                  />
-                </div>
+            <div className="grid md:grid-cols-2 gap-px bg-zinc-800">
+              {artists.map((a, index) => (
+                <div
+                  key={index}
+                  className="group relative overflow-hidden bg-black cursor-pointer"
+                  onClick={() => setSelectedArtist(a)}
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => e.key === "Enter" && setSelectedArtist(a)}
+                  aria-label={`View details for ${a.name}`}
+                >
+                  <div className="relative aspect-3/4 overflow-hidden">
+                    <Image
+                      src={a.image}
+                      alt={a.name}
+                      width={500}
+                      height={700}
+                      className="w-full h-full object-cover transition-all duration-700 group-hover:scale-105 group-hover:brightness-110"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
 
-                {/* Content Side */}
-                <div className="p-8 sm:p-12 md:p-16 bg-zinc-950 flex flex-col justify-center min-h-[400px] md:col-span-3">
-                  <div className="space-y-6">
-                    <div>
-                      <p className="text-xs tracking-widest uppercase opacity-60 mb-3">
-                        {artist.genre}
-                      </p>
-                      <h3 className="text-5xl sm:text-6xl md:text-7xl font-light tracking-tight mb-6">
-                        {artist.name}
-                      </h3>
+                    {/* "View Profile" hint pill */}
+                    <div className="absolute top-4 right-4 flex items-center gap-1.5 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-3 py-1.5 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-1 group-hover:translate-y-0">
+                      <svg
+                        className="w-3 h-3"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                      >
+                        <circle cx="11" cy="11" r="8" />
+                        <path d="m21 21-4.35-4.35" />
+                      </svg>
+                      <span className="text-xs tracking-wide">
+                        View Profile
+                      </span>
                     </div>
 
-                    <p className="text-base sm:text-lg opacity-80 leading-relaxed max-w-lg">
-                      {artist.bio}
-                    </p>
+                    <div className="absolute bottom-0 left-0 right-0 p-8 sm:p-10">
+                      <p className="text-xs tracking-widest uppercase opacity-60 mb-2">
+                        {a.genre}
+                      </p>
+                      <h3 className="text-4xl sm:text-5xl font-light tracking-tight mb-4">
+                        {a.name}
+                      </h3>
+                      <p className="text-sm opacity-70 leading-relaxed max-w-md mb-6 line-clamp-3">
+                        {a.bio}
+                      </p>
 
-                    {/* Social Links */}
-                    <div className="flex gap-3 pt-4">
-                      {artist.socials?.instagram && (
-                        <a
-                          href={artist.socials.instagram}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="w-12 h-12 border border-white/20 rounded-full flex items-center justify-center backdrop-blur-sm hover:bg-white/10 hover:border-white/40 transition-all duration-200"
-                          aria-label="Instagram"
-                        >
-                          <Instagram className="w-5 h-5" />
-                        </a>
-                      )}
-                      {artist.socials?.spotify && (
-                        <a
-                          href={artist.socials.spotify}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="w-12 h-12 border border-white/20 rounded-full flex items-center justify-center backdrop-blur-sm hover:bg-white/10 hover:border-white/40 transition-all duration-200"
-                          aria-label="Spotify"
-                        >
-                          <svg
-                            className="w-5 h-5"
-                            viewBox="0 0 20 20"
-                            fill="#ffffff"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <g strokeWidth="0"></g>
-                            <g strokeLinecap="round" strokeLinejoin="round"></g>
-                            <g>
-                              <g
-                                stroke="none"
-                                strokeWidth="1"
-                                fill="none"
-                                fillRule="evenodd"
+                      <div className="flex items-center justify-between">
+                        <div className="flex gap-3">
+                          {a.socials?.instagram && (
+                            <a
+                              href={a.socials.instagram}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              onClick={(e) => e.stopPropagation()}
+                              className="w-10 h-10 border border-white/20 rounded-full flex items-center justify-center hover:bg-white/10 hover:border-white/40 transition-all duration-200"
+                              aria-label="Instagram"
+                            >
+                              <Instagram className="w-4 h-4" />
+                            </a>
+                          )}
+                          {a.socials?.spotify && (
+                            <a
+                              href={a.socials.spotify}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              onClick={(e) => e.stopPropagation()}
+                              className="w-10 h-10 border border-white/20 rounded-full flex items-center justify-center hover:bg-white/10 hover:border-white/40 transition-all duration-200"
+                              aria-label="Spotify"
+                            >
+                              <svg
+                                className="w-4 h-4"
+                                viewBox="0 0 20 20"
+                                fill="#ffffff"
+                                xmlns="http://www.w3.org/2000/svg"
                               >
-                                <g
-                                  transform="translate(-140.000000, -7479.000000)"
-                                  fill="#ffffff"
-                                >
-                                  <g transform="translate(56.000000, 160.000000)">
-                                    <path d="M99.915,7327.865 C96.692,7325.951 91.375,7325.775 88.297,7326.709 C87.803,7326.858 87.281,7326.58 87.131,7326.085 C86.981,7325.591 87.26,7325.069 87.754,7324.919 C91.287,7323.846 97.159,7324.053 100.87,7326.256 C101.314,7326.52 101.46,7327.094 101.196,7327.538 C100.934,7327.982 100.358,7328.129 99.915,7327.865 L99.915,7327.865 Z M99.81,7330.7 C99.584,7331.067 99.104,7331.182 98.737,7330.957 C96.05,7329.305 91.952,7328.827 88.773,7329.792 C88.36,7329.916 87.925,7329.684 87.8,7329.272 C87.676,7328.86 87.908,7328.425 88.32,7328.3 C91.951,7327.198 96.466,7327.732 99.553,7329.629 C99.92,7329.854 100.035,7330.334 99.81,7330.7 L99.81,7330.7 Z M98.586,7333.423 C98.406,7333.717 98.023,7333.81 97.729,7333.63 C95.381,7332.195 92.425,7331.871 88.944,7332.666 C88.609,7332.743 88.274,7332.533 88.198,7332.197 C88.121,7331.862 88.33,7331.528 88.667,7331.451 C92.476,7330.58 95.743,7330.955 98.379,7332.566 C98.673,7332.746 98.766,7333.129 98.586,7333.423 L98.586,7333.423 Z M94,7319 C88.477,7319 84,7323.477 84,7329 C84,7334.523 88.477,7339 94,7339 C99.523,7339 104,7334.523 104,7329 C104,7323.478 99.523,7319.001 94,7319.001 L94,7319 Z"></path>
+                                <g>
+                                  <g
+                                    stroke="none"
+                                    strokeWidth="1"
+                                    fill="none"
+                                    fillRule="evenodd"
+                                  >
+                                    <g
+                                      transform="translate(-140.000000, -7479.000000)"
+                                      fill="#ffffff"
+                                    >
+                                      <g transform="translate(56.000000, 160.000000)">
+                                        <path d="M99.915,7327.865 C96.692,7325.951 91.375,7325.775 88.297,7326.709 C87.803,7326.858 87.281,7326.58 87.131,7326.085 C86.981,7325.591 87.26,7325.069 87.754,7324.919 C91.287,7323.846 97.159,7324.053 100.87,7326.256 C101.314,7326.52 101.46,7327.094 101.196,7327.538 C100.934,7327.982 100.358,7328.129 99.915,7327.865 L99.915,7327.865 Z M99.81,7330.7 C99.584,7331.067 99.104,7331.182 98.737,7330.957 C96.05,7329.305 91.952,7328.827 88.773,7329.792 C88.36,7329.916 87.925,7329.684 87.8,7329.272 C87.676,7328.86 87.908,7328.425 88.32,7328.3 C91.951,7327.198 96.466,7327.732 99.553,7329.629 C99.92,7329.854 100.035,7330.334 99.81,7330.7 L99.81,7330.7 Z M98.586,7333.423 C98.406,7333.717 98.023,7333.81 97.729,7333.63 C95.381,7332.195 92.425,7331.871 88.944,7332.666 C88.609,7332.743 88.274,7332.533 88.198,7332.197 C88.121,7331.862 88.33,7331.528 88.667,7331.451 C92.476,7330.58 95.743,7330.955 98.379,7332.566 C98.673,7332.746 98.766,7333.129 98.586,7333.423 L98.586,7333.423 Z M94,7319 C88.477,7319 84,7323.477 84,7329 C84,7334.523 88.477,7339 94,7339 C99.523,7339 104,7334.523 104,7329 C104,7323.478 99.523,7319.001 94,7319.001 L94,7319 Z"></path>
+                                      </g>
+                                    </g>
                                   </g>
                                 </g>
-                              </g>
-                            </g>
-                          </svg>
-                        </a>
-                      )}
-                      {artist.socials?.youtube && (
-                        <a
-                          href={artist.socials.youtube}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="w-12 h-12 border border-white/20 rounded-full flex items-center justify-center backdrop-blur-sm hover:bg-white/10 hover:border-white/40 transition-all duration-200"
-                          aria-label="YouTube"
-                        >
-                          <Youtube className="w-5 h-5" />
-                        </a>
-                      )}
-                      {artist.socials?.tiktok && (
-                        <a
-                          href={artist.socials.tiktok}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="w-12 h-12 border border-white/20 rounded-full flex items-center justify-center backdrop-blur-sm hover:bg-white/10 hover:border-white/40 transition-all duration-200"
-                          aria-label="Tiktok"
-                        >
-                          <svg
-                            width="20"
-                            height="20"
-                            fill="#ffffff"
-                            viewBox="0 0 32 32"
-                            version="1.1"
-                            xmlns="http://www.w3.org/2000/svg"
-                            stroke="#ffffff"
-                          >
-                            <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
-                            <g
-                              id="SVGRepo_tracerCarrier"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            ></g>
-                            <g id="SVGRepo_iconCarrier">
-                              {" "}
-                              <title>tiktok</title>{" "}
-                              <path d="M16.656 1.029c1.637-0.025 3.262-0.012 4.886-0.025 0.054 2.031 0.878 3.859 2.189 5.213l-0.002-0.002c1.411 1.271 3.247 2.095 5.271 2.235l0.028 0.002v5.036c-1.912-0.048-3.71-0.489-5.331-1.247l0.082 0.034c-0.784-0.377-1.447-0.764-2.077-1.196l0.052 0.034c-0.012 3.649 0.012 7.298-0.025 10.934-0.103 1.853-0.719 3.543-1.707 4.954l0.020-0.031c-1.652 2.366-4.328 3.919-7.371 4.011l-0.014 0c-0.123 0.006-0.268 0.009-0.414 0.009-1.73 0-3.347-0.482-4.725-1.319l0.040 0.023c-2.508-1.509-4.238-4.091-4.558-7.094l-0.004-0.041c-0.025-0.625-0.037-1.25-0.012-1.862 0.49-4.779 4.494-8.476 9.361-8.476 0.547 0 1.083 0.047 1.604 0.136l-0.056-0.008c0.025 1.849-0.050 3.699-0.050 5.548-0.423-0.153-0.911-0.242-1.42-0.242-1.868 0-3.457 1.194-4.045 2.861l-0.009 0.030c-0.133 0.427-0.21 0.918-0.21 1.426 0 0.206 0.013 0.41 0.037 0.61l-0.002-0.024c0.332 2.046 2.086 3.59 4.201 3.59 0.061 0 0.121-0.001 0.181-0.004l-0.009 0c1.463-0.044 2.733-0.831 3.451-1.994l0.010-0.018c0.267-0.372 0.45-0.822 0.511-1.311l0.001-0.014c0.125-2.237 0.075-4.461 0.087-6.698 0.012-5.036-0.012-10.060 0.025-15.083z"></path>{" "}
-                            </g>
-                          </svg>
-                        </a>
-                      )}
+                              </svg>
+                            </a>
+                          )}
+                          {a.socials?.youtube && (
+                            <a
+                              href={a.socials.youtube}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              onClick={(e) => e.stopPropagation()}
+                              className="w-10 h-10 border border-white/20 rounded-full flex items-center justify-center hover:bg-white/10 hover:border-white/40 transition-all duration-200"
+                              aria-label="YouTube"
+                            >
+                              <Youtube className="w-4 h-4" />
+                            </a>
+                          )}
+                          {a.socials?.tiktok && (
+                            <a
+                              href={a.socials.tiktok}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              onClick={(e) => e.stopPropagation()}
+                              className="w-10 h-10 border border-white/20 rounded-full flex items-center justify-center hover:bg-white/10 hover:border-white/40 transition-all duration-200"
+                              aria-label="TikTok"
+                            >
+                              <svg
+                                width="16"
+                                height="16"
+                                fill="#ffffff"
+                                viewBox="0 0 32 32"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path d="M16.656 1.029c1.637-0.025 3.262-0.012 4.886-0.025 0.054 2.031 0.878 3.859 2.189 5.213l-0.002-0.002c1.411 1.271 3.247 2.095 5.271 2.235l0.028 0.002v5.036c-1.912-0.048-3.71-0.489-5.331-1.247l0.082 0.034c-0.784-0.377-1.447-0.764-2.077-1.196l0.052 0.034c-0.012 3.649 0.012 7.298-0.025 10.934-0.103 1.853-0.719 3.543-1.707 4.954l0.020-0.031c-1.652 2.366-4.328 3.919-7.371 4.011l-0.014 0c-0.123 0.006-0.268 0.009-0.414 0.009-1.73 0-3.347-0.482-4.725-1.319l0.040 0.023c-2.508-1.509-4.238-4.091-4.558-7.094l-0.004-0.041c-0.025-0.625-0.037-1.25-0.012-1.862 0.49-4.779 4.494-8.476 9.361-8.476 0.547 0 1.083 0.047 1.604 0.136l-0.056-0.008c0.025 1.849-0.050 3.699-0.050 5.548-0.423-0.153-0.911-0.242-1.42-0.242-1.868 0-3.457 1.194-4.045 2.861l-0.009 0.030c-0.133 0.427-0.21 0.918-0.21 1.426 0 0.206 0.013 0.41 0.037 0.61l-0.002-0.024c0.332 2.046 2.086 3.59 4.201 3.59 0.061 0 0.121-0.001 0.181-0.004l-0.009 0c1.463-0.044 2.733-0.831 3.451-1.994l0.010-0.018c0.267-0.372 0.45-0.822 0.511-1.311l0.001-0.014c0.125-2.237 0.075-4.461 0.087-6.698 0.012-5.036-0.012-10.060 0.025-15.083z"></path>
+                              </svg>
+                            </a>
+                          )}
+                        </div>
+
+                        {/* Static "tap to explore" hint always visible at bottom-right */}
+                        <span className="text-[10px] tracking-widest uppercase opacity-30 group-hover:opacity-60 transition-opacity duration-300">
+                          Tap to explore →
+                        </span>
+                      </div>
                     </div>
                   </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Artist Modal */}
+        {selectedArtist && (
+          <div
+            className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-6"
+            onClick={() => setSelectedArtist(null)}
+          >
+            {/* Backdrop */}
+            <div className="absolute inset-0 bg-black/80 backdrop-blur-md" />
+
+            {/* Modal Panel */}
+            <div
+              className="relative w-full sm:max-w-3xl bg-zinc-950 border border-zinc-800 sm:rounded-2xl overflow-hidden max-h-[92dvh] flex flex-col sm:flex-row"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Close button */}
+              <button
+                onClick={() => setSelectedArtist(null)}
+                className="absolute top-4 right-4 z-10 w-9 h-9 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 border border-white/10 transition-all duration-200 text-white"
+                aria-label="Close"
+              >
+                <svg
+                  className="w-4 h-4"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                >
+                  <path d="M18 6 6 18M6 6l12 12" />
+                </svg>
+              </button>
+
+              {/* Image column */}
+              <div className="relative sm:w-64 shrink-0 aspect-[4/3] sm:aspect-auto overflow-hidden">
+                <Image
+                  src={selectedArtist.image}
+                  alt={selectedArtist.name}
+                  width={400}
+                  height={600}
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-transparent sm:bg-gradient-to-r sm:from-transparent sm:to-zinc-950/60" />
+              </div>
+
+              {/* Content column */}
+              <div className="flex-1 overflow-y-auto p-8 sm:p-10 flex flex-col gap-6">
+                <div>
+                  <p className="text-xs tracking-widest uppercase opacity-50 mb-2">
+                    {selectedArtist.genre}
+                  </p>
+                  <h2 className="text-4xl sm:text-5xl font-light tracking-tight text-white">
+                    {selectedArtist.name}
+                  </h2>
+                </div>
+
+                <p className="text-sm text-zinc-300 leading-relaxed">
+                  {selectedArtist.bio}
+                </p>
+
+                {/* Extra fields — render whatever your artist object has */}
+                {selectedArtist.label && (
+                  <div>
+                    <p className="text-[10px] tracking-widest uppercase opacity-40 mb-1">
+                      Label
+                    </p>
+                    <p className="text-sm text-white">{selectedArtist.label}</p>
+                  </div>
+                )}
+                {selectedArtist.origin && (
+                  <div>
+                    <p className="text-[10px] tracking-widest uppercase opacity-40 mb-1">
+                      Origin
+                    </p>
+                    <p className="text-sm text-white">
+                      {selectedArtist.origin}
+                    </p>
+                  </div>
+                )}
+                {selectedArtist.releases && (
+                  <div>
+                    <p className="text-[10px] tracking-widest uppercase opacity-40 mb-2">
+                      Releases
+                    </p>
+                    <ul className="space-y-1">
+                      {selectedArtist.releases.map((r, i) => (
+                        <li
+                          key={i}
+                          className="text-sm text-zinc-300 flex items-center gap-2"
+                        >
+                          <span className="w-1 h-1 rounded-full bg-zinc-500 shrink-0" />
+                          {r}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+
+                {/* Socials */}
+                <div className="flex gap-3 mt-auto pt-4 border-t border-zinc-800">
+                  {selectedArtist.socials?.instagram && (
+                    <a
+                      href={selectedArtist.socials.instagram}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-10 h-10 border border-white/20 rounded-full flex items-center justify-center hover:bg-white/10 hover:border-white/40 transition-all duration-200 text-white"
+                      aria-label="Instagram"
+                    >
+                      <Instagram className="w-4 h-4" />
+                    </a>
+                  )}
+                  {selectedArtist.socials?.spotify && (
+                    <a
+                      href={selectedArtist.socials.spotify}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-10 h-10 border border-white/20 rounded-full flex items-center justify-center hover:bg-white/10 hover:border-white/40 transition-all duration-200 text-white"
+                      aria-label="Spotify"
+                    >
+                      <svg
+                        className="w-4 h-4"
+                        viewBox="0 0 20 20"
+                        fill="#ffffff"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <g>
+                          <g
+                            stroke="none"
+                            strokeWidth="1"
+                            fill="none"
+                            fillRule="evenodd"
+                          >
+                            <g
+                              transform="translate(-140.000000, -7479.000000)"
+                              fill="#ffffff"
+                            >
+                              <g transform="translate(56.000000, 160.000000)">
+                                <path d="M99.915,7327.865 C96.692,7325.951 91.375,7325.775 88.297,7326.709 C87.803,7326.858 87.281,7326.58 87.131,7326.085 C86.981,7325.591 87.26,7325.069 87.754,7324.919 C91.287,7323.846 97.159,7324.053 100.87,7326.256 C101.314,7326.52 101.46,7327.094 101.196,7327.538 C100.934,7327.982 100.358,7328.129 99.915,7327.865 L99.915,7327.865 Z M99.81,7330.7 C99.584,7331.067 99.104,7331.182 98.737,7330.957 C96.05,7329.305 91.952,7328.827 88.773,7329.792 C88.36,7329.916 87.925,7329.684 87.8,7329.272 C87.676,7328.86 87.908,7328.425 88.32,7328.3 C91.951,7327.198 96.466,7327.732 99.553,7329.629 C99.92,7329.854 100.035,7330.334 99.81,7330.7 L99.81,7330.7 Z M98.586,7333.423 C98.406,7333.717 98.023,7333.81 97.729,7333.63 C95.381,7332.195 92.425,7331.871 88.944,7332.666 C88.609,7332.743 88.274,7332.533 88.198,7332.197 C88.121,7331.862 88.33,7331.528 88.667,7331.451 C92.476,7330.58 95.743,7330.955 98.379,7332.566 C98.673,7332.746 98.766,7333.129 98.586,7333.423 L98.586,7333.423 Z M94,7319 C88.477,7319 84,7323.477 84,7329 C84,7334.523 88.477,7339 94,7339 C99.523,7339 104,7334.523 104,7329 C104,7323.478 99.523,7319.001 94,7319.001 L94,7319 Z"></path>
+                              </g>
+                            </g>
+                          </g>
+                        </g>
+                      </svg>
+                    </a>
+                  )}
+                  {selectedArtist.socials?.youtube && (
+                    <a
+                      href={selectedArtist.socials.youtube}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-10 h-10 border border-white/20 rounded-full flex items-center justify-center hover:bg-white/10 hover:border-white/40 transition-all duration-200 text-white"
+                      aria-label="YouTube"
+                    >
+                      <Youtube className="w-4 h-4" />
+                    </a>
+                  )}
+                  {selectedArtist.socials?.tiktok && (
+                    <a
+                      href={selectedArtist.socials.tiktok}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-10 h-10 border border-white/20 rounded-full flex items-center justify-center hover:bg-white/10 hover:border-white/40 transition-all duration-200 text-white"
+                      aria-label="TikTok"
+                    >
+                      <svg
+                        width="16"
+                        height="16"
+                        fill="#ffffff"
+                        viewBox="0 0 32 32"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path d="M16.656 1.029c1.637-0.025 3.262-0.012 4.886-0.025 0.054 2.031 0.878 3.859 2.189 5.213l-0.002-0.002c1.411 1.271 3.247 2.095 5.271 2.235l0.028 0.002v5.036c-1.912-0.048-3.71-0.489-5.331-1.247l0.082 0.034c-0.784-0.377-1.447-0.764-2.077-1.196l0.052 0.034c-0.012 3.649 0.012 7.298-0.025 10.934-0.103 1.853-0.719 3.543-1.707 4.954l0.020-0.031c-1.652 2.366-4.328 3.919-7.371 4.011l-0.014 0c-0.123 0.006-0.268 0.009-0.414 0.009-1.73 0-3.347-0.482-4.725-1.319l0.040 0.023c-2.508-1.509-4.238-4.091-4.558-7.094l-0.004-0.041c-0.025-0.625-0.037-1.25-0.012-1.862 0.49-4.779 4.494-8.476 9.361-8.476 0.547 0 1.083 0.047 1.604 0.136l-0.056-0.008c0.025 1.849-0.050 3.699-0.050 5.548-0.423-0.153-0.911-0.242-1.42-0.242-1.868 0-3.457 1.194-4.045 2.861l-0.009 0.030c-0.133 0.427-0.21 0.918-0.21 1.426 0 0.206 0.013 0.41 0.037 0.61l-0.002-0.024c0.332 2.046 2.086 3.59 4.201 3.59 0.061 0 0.121-0.001 0.181-0.004l-0.009 0c1.463-0.044 2.733-0.831 3.451-1.994l0.010-0.018c0.267-0.372 0.45-0.822 0.511-1.311l0.001-0.014c0.125-2.237 0.075-4.461 0.087-6.698 0.012-5.036-0.012-10.060 0.025-15.083z"></path>
+                      </svg>
+                    </a>
+                  )}
                 </div>
               </div>
             </div>
           </div>
-        </section>
+        )}
 
         {/* Releases */}
         <section
@@ -558,7 +769,7 @@ export default function EssentialMusik() {
                     <button
                       onClick={() =>
                         setShowStreamingLinks(
-                          showStreamingLinks === i ? null : i
+                          showStreamingLinks === i ? null : i,
                         )
                       }
                       className="w-full mt-4 px-4 py-2.5 border border-zinc-700 hover:border-zinc-500 hover:bg-zinc-800 transition-all text-xs tracking-wider uppercase flex items-center justify-center gap-2 cursor-pointer"
