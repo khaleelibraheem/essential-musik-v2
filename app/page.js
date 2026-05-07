@@ -206,7 +206,7 @@ export default function EssentialMusik() {
             <div className="mb-6 sm:mb-12 flex items-center justify-center gap-3">
               <div className="w-2 h-2 rounded-full bg-violet-500 animate-pulse" />
               <span className="text-xs tracking-widest uppercase opacity-60">
-                Independent Label Est. 2024
+                Independent Label Est. 2022
               </span>
             </div>
 
@@ -219,7 +219,7 @@ export default function EssentialMusik() {
             </h1>
 
             <p className="text-sm sm:text-lg md:text-xl opacity-60 max-w-xl mx-auto mb-8 sm:mb-16 font-light px-4">
-              Essential Musik is a home for sound that moves differently —
+              Essential Musik is a home for sound that moves differently,
               exploring the space where rhythm meets emotion, and stories find
               their voice.
             </p>
@@ -865,20 +865,21 @@ export default function EssentialMusik() {
               {/* Left Column - Story */}
               <div className="md:col-span-7 space-y-6 text-base sm:text-lg text-zinc-400 leading-relaxed">
                 <p>
-                  Essential Musik was founded with one purpose — to give artists
+                  Essential Musik was founded with one purpose: to give artists
                   the freedom to create honestly. No trends. No formulas. Just
                   raw sound and genuine connection.
                 </p>
+
                 <p>
-                  From the underground scene to global stages, we&apos;re driven
-                  by discovery — exploring the corners of rhythm, texture, and
-                  mood that shape the world of modern music.
-                </p>
-                <p>
-                  Every release is a moment — a reflection of who we are, where
-                  we&apos;ve been, and where sound can take us next.
+                  From the underground scene to global stages, we are driven by
+                  discovery, exploring the corners of rhythm, texture, and mood
+                  that shape the world of modern music.
                 </p>
 
+                <p>
+                  Every release is a moment, a reflection of who we are, where
+                  we have been, and where sound can take us next.
+                </p>
                 {/* CEO Card */}
                 <div className="bg-zinc-900/50 backdrop-blur-sm border border-zinc-800/50 p-6 sm:p-8">
                   <div className="flex items-start gap-4 sm:gap-6 mb-6">
@@ -893,7 +894,7 @@ export default function EssentialMusik() {
                     </div>
                     <div className="flex-1 pt-2">
                       <h3 className="text-xl sm:text-2xl font-light tracking-tight mb-1">
-                        Jerry Isaac
+                        Jerry Isaacs
                       </h3>
                       <p className="text-xs sm:text-sm tracking-wider uppercase opacity-60 mb-3">
                         Founder & CEO
@@ -903,7 +904,7 @@ export default function EssentialMusik() {
                   </div>
 
                   <p className="text-sm sm:text-base text-zinc-400 leading-relaxed italic">
-                    &quot;Music isn&apos;t just about what you hear—it&apos;s
+                    &quot;Music isn&apos;t just about what you hear. It&apos;s
                     about what you feel, what you remember, and who you become
                     through it.&quot;
                   </p>
@@ -997,10 +998,10 @@ export default function EssentialMusik() {
               Let&apos;s create something real
             </h2>
             <p className="text-base sm:text-lg opacity-60 mb-12 sm:mb-16 max-w-xl mx-auto px-4">
-              Artists, producers, collaborators — we&apos;re always listening.
-              Send your demos, ideas, or sounds that deserve to be heard.
+              Artists, producers, and collaborators. We&apos;re always
+              listening. Send your demos, ideas, or sounds that deserve to be
+              heard.
             </p>
-
             <a
               href="mailto:info@essentialmusik.com"
               className="inline-flex items-center gap-3 text-base sm:text-lg hover:opacity-60 transition-opacity break-all"
@@ -1041,7 +1042,7 @@ export default function EssentialMusik() {
           {/* Bottom Bar */}
           <div className="border-t border-zinc-900 py-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs opacity-40">
             <div className="flex items-center gap-6">
-              <p>© 2024 Essential Musik</p>
+              <p>© 2022 Essential Musik</p>
               <a href="#" className="hover:opacity-100 transition-opacity">
                 Privacy Policy
               </a>
