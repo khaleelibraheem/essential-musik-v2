@@ -51,7 +51,7 @@ export default function EssentialMusik() {
       bio: "Skepper Jarju is a Gambian Afrobeats artist whose sound blends infectious rhythms, vibrant melodies, and authentic West African energy. Inspired by the global rise of Afrobeats, he creates music centered around rhythm, culture, emotion, and connection. With a style that combines energetic delivery, relatable storytelling, and rich African influences, Skepper Jarju’s music reflects passion, creativity, and originality. Proudly representing Gambian talent, he continues to build his presence within the Afrobeats scene while working on new music and steadily carving out a unique lane of his own.",
       socials: {
         instagram: "https://instagram.com/skepperjarju",
-        spotify: "https://open.spotify.com/artist/...",
+        spotify: "https://open.spotify.com/artist/skepper",
         youtube: "https://youtube.com/@skepperjarjuofficial2530",
         tiktok: "https://tiktok.com/skepperjarju",
         applemusic: "https://music.apple.com/us/artist/skepper/1740668223",
@@ -64,10 +64,10 @@ export default function EssentialMusik() {
       bio: "Zimre is a Nigerian singer and songwriter from Kogi State, raised in Kaduna, whose soulful Afrofusion blends emotion, rhythm, and heartfelt storytelling. Inspired by artists like Ed Sheeran, Johnny Drille, and Wizkid, he creates music centered around love, reflection, and deep human connection. Starting his musical journey in the church choir and pursuing music seriously since 2019, Zimre’s sound is calm, honest, and emotionally rich. Rooted in faith and guided by authenticity, he is currently working on new singles and an upcoming EP while steadily building a unique lane of his own.",
       image: "/zimre.jpg",
       socials: {
-        instagram: "https://instagram.com/zimre",
-        spotify: "",
-        youtube: "",
-        tiktok: "",
+        instagram: "https://instagram.com/zimreola",
+        spotify: "https://open.spotify.com/artist/Zimre",
+        youtube: "https://www.youtube.com/channel/UCQRz2l8rR3sC0xna2eTGTzw",
+        tiktok: "https://tiktok.com/zimreola",
       },
     },
   ];
